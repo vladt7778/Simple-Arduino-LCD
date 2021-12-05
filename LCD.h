@@ -21,7 +21,7 @@ class LCD
 
     uint8_t *m_LastTextSize = nullptr;
 
-    bool m_DisplayCleared;
+    bool m_DisplayCleared = false;
     bool m_DisplayToggle = true;
 
 public:

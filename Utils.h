@@ -3,7 +3,7 @@
 
 typedef unsigned long ulong;
 
-inline void ReplaceText(char *destination, const char *source)
+static inline void ReplaceText(char *destination, const char *source)
 {
     if (destination == NULL)
     {

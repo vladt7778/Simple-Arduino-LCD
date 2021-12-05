@@ -64,7 +64,7 @@ void LCD::ClearLCD()
             m_LastText[i][COLS] = '\0';
             m_DisplayInstance->setCursor(0, i), m_DisplayInstance->print(m_LastText[i]);
         }
-        memset(m_LastTextSize, __UINT8_MAX__, ROWS * sizeof(m_LastTextSize));
+        memset(m_LastTextSize, __UINT8_MAX__, ROWS * sizeof(*m_LastTextSize) );
         m_DisplayCleared = true;
     }
 }
@@ -91,10 +91,9 @@ void LCD::ClearLCD(uint8_t line, uint8_t startPos, uint8_t endPos)
 
 void LCD::Init()
 {
-    ClearLCD();
-    ResetDisplayView();
-
     m_DisplayInstance->begin(COLS, ROWS);
+    ResetDisplayView();
+    ClearLCD();
 
     SetVisible(true);
 }
@@ -185,6 +184,7 @@ void LCD::UpdateLCDText(uint8_t line, uint8_t pos, const char *text, bool clearR
     {
         ReplaceText(m_LastText[line] + pos, text);
         m_LastTextSize[line] = strlen(text);
+        m_LastTextSize[line] = COLS - strlen(text) + pos;
     }
 
     if (m_DisplayCleared)
