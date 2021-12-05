@@ -10,10 +10,5 @@ static inline void ReplaceText(char *destination, const char *source)
         return;
     }
 
-    while (*source != '\0')
-    {
-        *destination = *source;
-        destination++;
-        source++;
-    }
+    while (*destination++ = *source++);
 }
