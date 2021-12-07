@@ -183,7 +183,6 @@ void LCD::UpdateLCDText(uint8_t line, uint8_t pos, const char *text, bool clearR
     else
     {
         ReplaceText(m_LastText[line] + pos, text);
-        m_LastTextSize[line] = strlen(text);
         m_LastTextSize[line] = COLS - strlen(text) + pos;
     }
 
