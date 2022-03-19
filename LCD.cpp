@@ -64,7 +64,7 @@ void LCD::ClearLCD()
             m_LastText[i][COLS] = '\0';
             m_DisplayInstance->setCursor(0, i), m_DisplayInstance->print(m_LastText[i]);
         }
-        memset(m_LastTextSize, __UINT8_MAX__, ROWS * sizeof(*m_LastTextSize) );
+        memset(m_LastTextSize, __UINT8_MAX__, ROWS * sizeof(*m_LastTextSize));
         m_DisplayCleared = true;
     }
 }
@@ -134,17 +134,18 @@ void LCD::SetVisible(bool toggle)
     {
         m_DisplayInstance->noDisplay();
         analogWrite(BRIGHTNESS_PIN, 0);
+        m_DisplayToggle = false;
     }
     else
     {
         m_DisplayInstance->display();
         analogWrite(BRIGHTNESS_PIN, m_Brightness);
+        m_DisplayToggle = true;
     }
 }
 
 void LCD::ToggleVisibile()
 {
-    m_DisplayToggle ^= true;
     SetVisible(m_DisplayToggle);
 }
 
