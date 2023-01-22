@@ -12,6 +12,18 @@ LCD::LCD(uint8_t cols, uint8_t rows, uint8_t rs, uint8_t enable, uint8_t d4, uin
         m_LastText[i] = new char[cols + 1];
     }
 
+    byte fullRectangle[] = {
+        B11111,
+        B11111,
+        B11111,
+        B11111,
+        B11111,
+        B11111,
+        B11111,
+        B11111};
+
+    m_DisplayInstance->createChar(0, fullRectangle);
+
     pinMode(brightnessPin, OUTPUT);
     pinMode(contrastPin, OUTPUT);
 }
@@ -96,6 +108,21 @@ void LCD::Init()
     ClearLCD();
 
     SetVisible(true);
+}
+
+void LCD::MapToValAndDrawProgress(uint8_t line, long inputValue, long rangeMin, long rangeMax, uint8_t minCol, uint8_t maxCol)
+{
+    uint8_t maxColumn = map(inputValue, rangeMin, rangeMax, minCol, maxCol);
+    for (uint8_t i = minCol; i < maxColumn + 1; ++i)
+    {
+        m_DisplayInstance->setCursor(i, line);
+        m_DisplayInstance->write(byte(0));
+    }
+}
+
+void LCD::MapToValAndDrawProgress(uint8_t line, long inputValue, long rangeMin, long rangeMax)
+{
+    MapToValAndDrawProgress(line, inputValue, rangeMin, rangeMax, 0, COLS);
 }
 
 void LCD::ResetBrightness()

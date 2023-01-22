@@ -36,6 +36,8 @@ public:
     void ClearLCD();
     void ClearLCD(uint8_t line, uint8_t startPos, uint8_t endPos = __UINT8_MAX__);
     void Init();
+    void MapToValAndDrawProgress(uint8_t line, long inputValue, long rangeMin, long rangeMax);
+    void MapToValAndDrawProgress(uint8_t line, long inputValue, long rangeMin, long rangeMax, uint8_t minCol, uint8_t maxCol);
     void ResetBrightness();
     void ResetContrast();
     void ResetDisplayView();
