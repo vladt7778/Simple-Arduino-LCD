@@ -112,6 +112,7 @@ void LCD::Init()
 
 void LCD::MapToValAndDrawProgress(uint8_t line, long inputValue, long rangeMin, long rangeMax, uint8_t minCol, uint8_t maxCol)
 {
+    ClearLCD(line, minCol);
     uint8_t maxColumn = map(inputValue, rangeMin, rangeMax, minCol, maxCol);
     for (uint8_t i = minCol; i < maxColumn + 1; ++i)
     {
